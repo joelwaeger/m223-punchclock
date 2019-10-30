@@ -25,6 +25,10 @@ public class Entry {
     @Column(nullable = false)
     private LocalDateTime checkOut;
 
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Long getId() {
         return id;
     }
@@ -47,5 +51,9 @@ public class Entry {
 
     public void setCheckOut(LocalDateTime checkOut) {
         this.checkOut = checkOut;
+    }
+
+    public int isDateEqual() {
+        return checkIn.compareTo(checkOut);
     }
 }
