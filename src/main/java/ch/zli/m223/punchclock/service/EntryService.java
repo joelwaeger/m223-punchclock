@@ -1,19 +1,16 @@
 package ch.zli.m223.punchclock.service;
 
+import ch.zli.m223.punchclock.domain.Category;
 import ch.zli.m223.punchclock.domain.Entry;
 import ch.zli.m223.punchclock.repository.EntryRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.BadRequestException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EntryService {
     private EntryRepository entryRepository;
-
     public EntryService(EntryRepository entryRepository) {
         this.entryRepository = entryRepository;
     }
