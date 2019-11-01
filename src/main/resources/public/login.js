@@ -13,18 +13,22 @@ const createEntry = (e) => {
     // entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     // entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
 
-    fetch(`${URL}/entries`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(entry)
-    }).then((result) => {
-        result.json().then((entry) => {
-            entries.push(entry);
-            renderEntries();
+    function getCredentials(userName, password){
+        fetch(`${URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify()
+        }).then((result) => {
+            result.json().then((entry) => {
+                entries.push(entry);
+                renderEntries();
+            });
         });
-    });
+    }
+
+
 };
 /*
 
@@ -45,7 +49,7 @@ const createCell = (text) => {
     cell.innerText = text;
     return cell;
 };
-*/
+
 const renderEntries = () => {
     const display = document.querySelector('#entryDisplay');
     display.innerHTML = '';
@@ -58,7 +62,7 @@ const renderEntries = () => {
     });
 };
 
-
+*/
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#loginForm');
     createEntryForm.addEventListener('submit', createEntry);
