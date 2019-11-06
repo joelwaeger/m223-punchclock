@@ -30,7 +30,6 @@ const createEntry = (e) => {
 
 
 };
-/*
 
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
@@ -62,7 +61,7 @@ const renderEntries = () => {
     });
 };
 
-*/
+
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#loginForm');
     createEntryForm.addEventListener('submit', createEntry);

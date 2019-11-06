@@ -18,7 +18,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                         "Access-Control-Allow-Origin",
                         "Access-Control-Expose-Headers",
                         "Authorization",
-                        "Cache-Control",
+                          "Cache-Control",
                         "Content-Type",
                         "Origin"
                 );
