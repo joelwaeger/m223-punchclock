@@ -6,14 +6,29 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Punchclock Client</title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="login.js" type="application/javascript"></script>
 </head>
 <body>
 <form id="loginForm">
-    <input type="text" name="username"/>
-    <input type="password" name="password"/>
-    <input type="submit" value="Login" onclick="getCredentials(username, password);"/>
+    <input type="text" name="username" />
+    <input type="password" name="password" />
+    <input type="submit" value="Login" onclick="return getCredentials(username, password);" />
 </form>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Check in</th>
+        <th>Check out</th>
+
+    </tr>
+    </thead>
+    <tbody id="entryDisplay">
+    <tr>
+        <td colspan="3">Loading...</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
