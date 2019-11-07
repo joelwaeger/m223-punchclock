@@ -12,7 +12,6 @@ const createEntry = (e) => {
     // const entry = {};
     // entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     // entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-
 };
 
 const indexEntries = () => {
