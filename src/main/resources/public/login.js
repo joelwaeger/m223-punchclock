@@ -13,22 +13,6 @@ const createEntry = (e) => {
     // entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
     // entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
 
-    function getCredentials(userName, password){
-        fetch(`${URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify()
-        }).then((result) => {
-            result.json().then((entry) => {
-                entries.push(entry);
-                renderEntries();
-            });
-        });
-    }
-
-
 };
 
 const indexEntries = () => {
@@ -48,7 +32,7 @@ const createCell = (text) => {
     cell.innerText = text;
     return cell;
 };
-
+/*
 const renderEntries = () => {
     const display = document.querySelector('#entryDisplay');
     display.innerHTML = '';
@@ -61,9 +45,29 @@ const renderEntries = () => {
     });
 };
 
-
+*/
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#loginForm');
     createEntryForm.addEventListener('submit', createEntry);
     indexEntries();
 });
+
+function getCredentials(userName, password){
+    fetch(`${URL}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: `{"username": "${userName.value}","password": "${password.value}"}`
+    }).then((result) => {
+
+        if (result.status === 200) {
+            let authHeader = result.headers.get("Authorization");
+            window.sessionStorage.setItem("token", authHeader);
+            window.location.href="http://localhost:8081/index.html";
+        } else {
+            console.log({html: 'Invalid Login'})
+        }
+
+    });
+}
