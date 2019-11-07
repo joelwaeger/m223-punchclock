@@ -4,10 +4,8 @@ let entries = [];
 const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
 };
-
+*/
 //Hides Password in URL
-
-
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
         method: 'GET'
@@ -25,7 +23,6 @@ const createCell = (text) => {
     cell.innerText = text;
     return cell;
 };
-
 const renderEntries = () => {
     const display = document.querySelector('#entryDisplay');
     display.innerHTML = '';
@@ -38,9 +35,6 @@ const renderEntries = () => {
     });
 };
 
-
-
- */
 const createEntry = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -64,7 +58,6 @@ function getCredentials(userName, password){
         },
         body: `{"username": "${userName.value}","password": "${password.value}"}`
     }).then((result) => {
-
         if (result.status == 200) {
             let authHeader = result.headers.get("Authorization");
             window.sessionStorage.setItem("token", authHeader);
@@ -76,3 +69,4 @@ function getCredentials(userName, password){
 
     });
 }
+

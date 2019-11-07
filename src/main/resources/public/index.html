@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
@@ -28,10 +28,25 @@
                 </tr>
             </thead>
             <tbody id="entryDisplay">
-                <tr>
-                    <td colspan="3">Loading...</td>
+                <tr th:each="entry : ${}">
+                    <td th:text="${entry.checkIn}"></td>
+                    <td th:text="${entry.checkOut}"></td>
                 </tr>
             </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${}">
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                </tr>
+            </tbody>S
         </table>
     </body>
 </html>

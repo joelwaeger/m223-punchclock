@@ -35,6 +35,5 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ApplicationUser>> getAllUsers() {
         return new ResponseEntity<>(userDetailsService.findAll(), HttpStatus.OK);
-
     }
 }
