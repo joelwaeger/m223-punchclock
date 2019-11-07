@@ -2,31 +2,33 @@ const URL = 'http://localhost:8081';
 let users = [];
 var token = window.sessionStorage.getItem("token");
 
-const userandpw = (username, password) => {
-    return new Date(`${dateString}T${timeString}`).toISOString();
-};
 
-const createUser = (e) => {
+const createEntry = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const user = {};
-    user['username'] = userandpw.getElementById("username");
-    user['password'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
+    console.log(formData);
+};
 
-    fetch(`${URL}/entries`, {
+function getCredentials(userName, password){
+    fetch(`${URL}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(entry)
+        body: `{"username": "${userName.value}","password": "${password.value}"}`
     }).then((result) => {
-        result.json().then((entry) => {
-            users.push(entry);
-            renderEntries();
-        });
-    });
-};
 
+        if (result.status == 200) {
+            let authHeader = result.headers.get("Authorization");
+            window.sessionStorage.setItem("token", authHeader);
+            window.location.href="http://localhost:8081/entries.html";
+        } else {
+            console.log("error");
+            M.toast({html: 'Invalid Login'})
+        }
+
+    });
+}
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
         method: 'GET'

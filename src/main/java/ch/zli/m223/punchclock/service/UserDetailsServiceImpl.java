@@ -15,9 +15,11 @@ import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    private ApplicationUser applicationUser;
     private ApplicationUserRepository applicationUserRepository;
 
-    public UserDetailsServiceImpl(ApplicationUserRepository applicationUserRepository) {
+    public UserDetailsServiceImpl(ApplicationUser applicationUser, ApplicationUserRepository applicationUserRepository) {
+        this.applicationUser = applicationUser;
         this.applicationUserRepository = applicationUserRepository;
     }
 
@@ -29,21 +31,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
     }
-
     public List<ApplicationUser> findAll() {
         return applicationUserRepository.findAll();
     }
-/*
+
+
     private static List<ApplicationUser> users;
     {
         users = new ArrayList<ApplicationUser>();
-        users.add(new ApplicationUser(1,"joel", "test"));
+        users.add(new ApplicationUser(1, "TEST", "help"));
         users.add(new ApplicationUser(2,"joel", "123"));
     }
-*/
 
+    public List<ApplicationUser> list() {
+        return users;
+    }
 
-   /* public Long delete(Long id) {
+   public Long delete(Long id) {
 
         for (ApplicationUser c : users) {
             if (c.getId().equals(id)) {
@@ -51,10 +55,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 return id;
             }
         }
-
-
         return null;
     }
+    public void create(User user) {
+        user.setId(System.currentTimeMillis());
+        users.add(user);
+    }
 
- */
+
 }

@@ -12,6 +12,12 @@ import javax.persistence.Id;
         private String username;
         private String password;
 
+        public ApplicationUser(long id, String username, String password) {
+            this.id = id;
+            this.username = username;
+            this.password = password;
+        }
+
         public long getId() {
             return id;
         }
@@ -30,6 +36,9 @@ import javax.persistence.Id;
 
         public void setPassword(String password) {
             this.password = password;
+        }
+
+        public void setId(long currentTimeMillis) {
         }
     }
 
