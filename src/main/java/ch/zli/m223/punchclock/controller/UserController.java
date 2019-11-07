@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
     private UserDetailsServiceImpl userDetailsService;
     private ApplicationUserRepository applicationUserRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -35,26 +34,10 @@ public class UserController {
         applicationUserRepository.save(user);
     }
 
-    @GetMapping("/customers")
-    public List<ApplicationUser> getCustomers() {
-        return userDetailsService.list();
-    }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ApplicationUser>> getAllUsers() {
+        return new ResponseEntity<>(userDetailsService.findAll(), HttpStatus.OK);
 
-    @DeleteMapping("/index.html/{id}")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
-
-        if (null == userDetailsService.delete(id)) {
-            return new ResponseEntity<String>("No Customer found for ID " + id, HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
-
-    }
-    @PostMapping(value = "/index.html")
-    public ResponseEntity<?> createCustomer(@RequestBody User user) {
-
-        userDetailsService.create((org.springframework.security.core.userdetails.User) user);
-
-        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

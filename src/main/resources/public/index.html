@@ -8,6 +8,8 @@
         <title>Punchclock Client</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="script.js" type="application/javascript"></script>
+        <script src="user.js" type="application/javascript"></script>
+
     </head>
     <body>
         <form id="createEntryForm">
@@ -38,14 +40,14 @@
                 <tr>
                     <th>Username</th>
                     <th>Password</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody id="userdispay">
-                <tr th:each="user : ${}">
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.password}"></td>
-                </tr>
-            </tbody>S
+            <tbody id="userDisplay">
+            <tr>
+                <td colspan="3">Loading...</td>
+            </tr>
+            </tbody>
         </table>
     </body>
 </html>

@@ -43,6 +43,7 @@ const indexEntries = () => {
         });
     });
     renderEntries();
+    indexUsers();
 };
 
 const createCell = (text) => {
@@ -68,3 +69,29 @@ document.addEventListener('DOMContentLoaded', function(){
     createEntryForm.addEventListener('submit', createEntry);
     indexEntries();
 });
+
+const indexUsers = () => {
+    fetch(`${URL}/users`, {
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }).then((result) => {
+        result.json().then((result) => {
+            users = result;
+            renderUsers();
+        });
+    });
+};
+
+const renderUsers = () => {
+    const display = document.querySelector('#userDisplay');
+    display.innerHTML = '';
+    console.log(users);
+    users.forEach((user) => {
+        const row = document.createElement('tr');
+        row.appendChild(createCell(user.username));
+        row.appendChild(createCell(user.password));
+        display.appendChild(row);
+    });
+};

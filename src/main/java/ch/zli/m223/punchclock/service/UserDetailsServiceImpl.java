@@ -2,6 +2,7 @@ package ch.zli.m223.punchclock.service;
 
 import ch.zli.m223.punchclock.domain.ApplicationUser;
 import ch.zli.m223.punchclock.repository.ApplicationUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,11 +16,9 @@ import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private ApplicationUser applicationUser;
     private ApplicationUserRepository applicationUserRepository;
-
-    public UserDetailsServiceImpl(ApplicationUser applicationUser, ApplicationUserRepository applicationUserRepository) {
-        this.applicationUser = applicationUser;
+    @Autowired
+    public UserDetailsServiceImpl( ApplicationUserRepository applicationUserRepository) {
         this.applicationUserRepository = applicationUserRepository;
     }
 
@@ -31,11 +30,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
     }
-    public List<ApplicationUser> findAll() {
-        return applicationUserRepository.findAll();
-    }
 
 
+
+
+/*
     private static List<ApplicationUser> users;
     {
         users = new ArrayList<ApplicationUser>();
@@ -50,17 +49,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    public Long delete(Long id) {
 
         for (ApplicationUser c : users) {
-            if (c.getId().equals(id)) {
+            if (c.getId() == (id)) {
                 users.remove(c);
                 return id;
             }
         }
         return null;
     }
-    public void create(User user) {
+
+    public void create(ApplicationUser user) {
         user.setId(System.currentTimeMillis());
         users.add(user);
     }
 
-
+*/
+public List<ApplicationUser> findAll() {
+    return applicationUserRepository.findAll();
+}
 }
