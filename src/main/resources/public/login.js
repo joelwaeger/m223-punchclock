@@ -1,35 +1,12 @@
 const URL = 'http://localhost:8081';
 let entries = [];
-
+/*
 const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
 };
 
 //Hides Password in URL
-const createEntry = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    // const entry = {};
-    // entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
-    // entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
 
-    function getCredentials(userName, password){
-        fetch(`${URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify()
-        }).then((result) => {
-            result.json().then((entry) => {
-                entries.push(entry);
-                renderEntries();
-            });
-        });
-    }
-
-
-};
 
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
@@ -62,8 +39,40 @@ const renderEntries = () => {
 };
 
 
+
+ */
+const createEntry = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    console.log(formData);
+    // const entry = {};
+    // entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
+    // entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
+};
+
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#loginForm');
     createEntryForm.addEventListener('submit', createEntry);
     indexEntries();
 });
+
+function getCredentials(userName, password){
+    fetch(`${URL}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: `{"username": "${userName.value}","password": "${password.value}"}`
+    }).then((result) => {
+
+        if (result.status == 200) {
+            let authHeader = result.headers.get("Authorization");
+            window.sessionStorage.setItem("token", authHeader);
+            window.location.href="http://localhost:8081/entries.html";
+        } else {
+            console.log("error");
+            M.toast({html: 'Invalid Login'})
+        }
+
+    });
+}

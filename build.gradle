@@ -30,6 +30,7 @@ dependencies {
 	implementation 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile("com.auth0:java-jwt:3.4.0")
+	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '2.0.5'
 
 	//testImplementation 'org.springframework.security:spring-security-test'
 }
